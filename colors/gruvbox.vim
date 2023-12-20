@@ -269,29 +269,6 @@ let s:gb.aqua   = s:aqua
 let s:gb.orange = s:orange
 
 " }}}
-" Setup Terminal Colors For Vim: {{{
-
-if has('terminal')
-    let g:terminal_ansi_colors = [
-                \s:bg0[0],
-                \s:gb.neutral_red[0],
-                \s:gb.neutral_green[0],
-                \s:gb.neutral_yellow[0],
-                \s:gb.neutral_blue[0],
-                \s:gb.neutral_purple[0],
-                \s:gb.neutral_aqua[0],
-                \s:fg4[0],
-                \s:gray[0],
-                \s:red[0],
-                \s:green[0],
-                \s:yellow[0],
-                \s:blue[0],
-                \s:purple[0],
-                \s:aqua[0],
-                \s:fg1[0]]
-endif
-
-" }}}
 " Setup Terminal Colors For Neovim: {{{
 
 if has('nvim')
@@ -318,6 +295,29 @@ if has('nvim')
 
   let g:terminal_color_7 = s:fg4[0]
   let g:terminal_color_15 = s:fg1[0]
+else
+    " }}}
+    " Setup Terminal Colors For Vim: {{{
+
+    if has('terminal')
+        let g:terminal_ansi_colors = [
+                    \s:bg0[0],
+                    \s:gb.neutral_red[0],
+                    \s:gb.neutral_green[0],
+                    \s:gb.neutral_yellow[0],
+                    \s:gb.neutral_blue[0],
+                    \s:gb.neutral_purple[0],
+                    \s:gb.neutral_aqua[0],
+                    \s:fg4[0],
+                    \s:gray[0],
+                    \s:red[0],
+                    \s:green[0],
+                    \s:yellow[0],
+                    \s:blue[0],
+                    \s:purple[0],
+                    \s:aqua[0],
+                    \s:fg1[0]]
+    endif
 endif
 
 " }}}
@@ -325,119 +325,119 @@ endif
 
 let s:hls_cursor = s:orange
 if exists('g:gruvbox_hls_cursor')
-  let s:hls_cursor = get(s:gb, g:gruvbox_hls_cursor)
+    let s:hls_cursor = get(s:gb, g:gruvbox_hls_cursor)
 endif
 
 let s:number_column = s:none
 if exists('g:gruvbox_number_column')
-  let s:number_column = get(s:gb, g:gruvbox_number_column)
+    let s:number_column = get(s:gb, g:gruvbox_number_column)
 endif
 
 let s:sign_column = s:bg1
 
 if exists('g:gitgutter_override_sign_column_highlight') &&
-      \ g:gitgutter_override_sign_column_highlight == 1
-  let s:sign_column = s:number_column
+            \ g:gitgutter_override_sign_column_highlight == 1
+    let s:sign_column = s:number_column
 else
-  let g:gitgutter_override_sign_column_highlight = 0
+    let g:gitgutter_override_sign_column_highlight = 0
 
-  if exists('g:gruvbox_sign_column')
-    let s:sign_column = get(s:gb, g:gruvbox_sign_column)
-  endif
+    if exists('g:gruvbox_sign_column')
+        let s:sign_column = get(s:gb, g:gruvbox_sign_column)
+    endif
 endif
 
 let s:color_column = s:bg1
 if exists('g:gruvbox_color_column')
-  let s:color_column = get(s:gb, g:gruvbox_color_column)
+    let s:color_column = get(s:gb, g:gruvbox_color_column)
 endif
 
 let s:vert_split = s:bg0
 if exists('g:gruvbox_vert_split')
-  let s:vert_split = get(s:gb, g:gruvbox_vert_split)
+    let s:vert_split = get(s:gb, g:gruvbox_vert_split)
 endif
 
 let s:invert_signs = ''
 if exists('g:gruvbox_invert_signs')
-  if g:gruvbox_invert_signs == 1
-    let s:invert_signs = s:inverse
-  endif
+    if g:gruvbox_invert_signs == 1
+        let s:invert_signs = s:inverse
+    endif
 endif
 
 let s:invert_selection = s:inverse
 if exists('g:gruvbox_invert_selection')
-  if g:gruvbox_invert_selection == 0
-    let s:invert_selection = ''
-  endif
+    if g:gruvbox_invert_selection == 0
+        let s:invert_selection = ''
+    endif
 endif
 
 let s:invert_tabline = ''
 if exists('g:gruvbox_invert_tabline')
-  if g:gruvbox_invert_tabline == 1
-    let s:invert_tabline = s:inverse
-  endif
+    if g:gruvbox_invert_tabline == 1
+        let s:invert_tabline = s:inverse
+    endif
 endif
 
 let s:italicize_comments = s:italic
 if exists('g:gruvbox_italicize_comments')
-  if g:gruvbox_italicize_comments == 0
-    let s:italicize_comments = ''
-  endif
+    if g:gruvbox_italicize_comments == 0
+        let s:italicize_comments = ''
+    endif
 endif
 
 let s:italicize_strings = ''
 if exists('g:gruvbox_italicize_strings')
-  if g:gruvbox_italicize_strings == 1
-    let s:italicize_strings = s:italic
-  endif
+    if g:gruvbox_italicize_strings == 1
+        let s:italicize_strings = s:italic
+    endif
 endif
 
 " }}}
 " Highlighting Function: {{{
 
 function! s:HL(group, fg, ...)
-  " Arguments: group, guifg, guibg, gui, guisp
+    " Arguments: group, guifg, guibg, gui, guisp
 
-  " foreground
-  let fg = a:fg
+    " foreground
+    let fg = a:fg
 
-  " background
-  if a:0 >= 1
-    let bg = a:1
-  else
-    let bg = s:none
-  endif
-
-  " emphasis
-  if a:0 >= 2 && strlen(a:2)
-    let emstr = a:2
-  else
-    let emstr = 'NONE,'
-  endif
-
-  " special fallback
-  if a:0 >= 3
-    if g:gruvbox_guisp_fallback != 'NONE'
-      let fg = a:3
+    " background
+    if a:0 >= 1
+        let bg = a:1
+    else
+        let bg = s:none
     endif
 
-    " bg fallback mode should invert higlighting
-    if g:gruvbox_guisp_fallback == 'bg'
-      let emstr .= 'inverse,'
+    " emphasis
+    if a:0 >= 2 && strlen(a:2)
+        let emstr = a:2
+    else
+        let emstr = 'NONE,'
     endif
-  endif
 
-  let histring = [ 'hi', a:group,
-        \ 'guifg=' . fg[0], 'ctermfg=' . fg[1],
-        \ 'guibg=' . bg[0], 'ctermbg=' . bg[1],
-        \ 'gui=' . emstr[:-2], 'cterm=' . emstr[:-2]
-        \ ]
+    " special fallback
+    if a:0 >= 3
+        if g:gruvbox_guisp_fallback != 'NONE'
+            let fg = a:3
+        endif
 
-  " special
-  if a:0 >= 3
-    call add(histring, 'guisp=' . a:3[0])
-  endif
+        " bg fallback mode should invert higlighting
+        if g:gruvbox_guisp_fallback == 'bg'
+            let emstr .= 'inverse,'
+        endif
+    endif
 
-  execute join(histring, ' ')
+    let histring = [ 'hi', a:group,
+                \ 'guifg=' . fg[0], 'ctermfg=' . fg[1],
+                \ 'guibg=' . bg[0], 'ctermbg=' . bg[1],
+                \ 'gui=' . emstr[:-2], 'cterm=' . emstr[:-2]
+                \ ]
+
+    " special
+    if a:0 >= 3
+        call add(histring, 'guisp=' . a:3[0])
+    endif
+
+    execute join(histring, ' ')
 endfunction
 
 " }}}
@@ -491,37 +491,37 @@ call s:HL('Normal', s:fg1, s:bg0)
 " --- Problem with changing between dark and light on 256 color terminal
 " --- https://github.com/morhetz/gruvbox/issues/7
 if s:is_dark
-  set background=dark
+    set background=dark
 else
-  set background=light
+    set background=light
 endif
 
 if version >= 700
-  " Screen line that the cursor is
-  call s:HL('CursorLine',   s:none, s:bg1)
-  " Screen column that the cursor is
-  hi! link CursorColumn CursorLine
+    " Screen line that the cursor is
+    call s:HL('CursorLine',   s:none, s:bg1)
+    " Screen column that the cursor is
+    hi! link CursorColumn CursorLine
 
-  " Tab pages line filler
-  call s:HL('TabLineFill', s:bg4, s:bg1, s:invert_tabline)
-  " Active tab page label
-  call s:HL('TabLineSel', s:green, s:bg1, s:invert_tabline)
-  " Not active tab page label
-  hi! link TabLine TabLineFill
+    " Tab pages line filler
+    call s:HL('TabLineFill', s:bg4, s:bg1, s:invert_tabline)
+    " Active tab page label
+    call s:HL('TabLineSel', s:green, s:bg1, s:invert_tabline)
+    " Not active tab page label
+    hi! link TabLine TabLineFill
 
-  " Match paired bracket under the cursor
-  call s:HL('MatchParen', s:none, s:bg3, s:bold)
+    " Match paired bracket under the cursor
+    call s:HL('MatchParen', s:none, s:bg3, s:bold)
 endif
 
 if version >= 703
-  " Highlighted screen columns
-  call s:HL('ColorColumn',  s:none, s:color_column)
+    " Highlighted screen columns
+    call s:HL('ColorColumn',  s:none, s:color_column)
 
-  " Concealed element: \lambda → λ
-  call s:HL('Conceal', s:blue, s:none)
+    " Concealed element: \lambda → λ
+    call s:HL('Conceal', s:blue, s:none)
 
-  " Line number of CursorLine
-  call s:HL('CursorLineNr', s:yellow, s:bg1)
+    " Line number of CursorLine
+    call s:HL('CursorLineNr', s:yellow, s:bg1)
 endif
 
 hi! link NonText GruvboxBg2
@@ -591,9 +591,9 @@ hi! link lCursor Cursor
 " Syntax Highlighting: {{{
 
 if g:gruvbox_improved_strings == 0
-  hi! link Special GruvboxOrange
+    hi! link Special GruvboxOrange
 else
-  call s:HL('Special', s:orange, s:bg1, s:italicize_strings)
+    call s:HL('Special', s:orange, s:bg1, s:italicize_strings)
 endif
 
 call s:HL('Comment', s:gray, s:none, s:italicize_comments)
@@ -637,9 +637,9 @@ hi! link Constant GruvboxPurple
 hi! link Character GruvboxPurple
 " String constant: "this is a string"
 if g:gruvbox_improved_strings == 0
-  call s:HL('String',  s:green, s:none, s:italicize_strings)
+    call s:HL('String',  s:green, s:none, s:italicize_strings)
 else
-  call s:HL('String',  s:fg1, s:bg1, s:italicize_strings)
+    call s:HL('String',  s:fg1, s:bg1, s:italicize_strings)
 endif
 " Boolean constant: TRUE, false
 hi! link Boolean GruvboxPurple
@@ -661,14 +661,14 @@ hi! link Typedef GruvboxYellow
 " Completion Menu: {{{
 
 if version >= 700
-  " Popup menu: normal item
-  call s:HL('Pmenu', s:fg1, s:bg2)
-  " Popup menu: selected item
-  call s:HL('PmenuSel', s:bg2, s:blue, s:bold)
-  " Popup menu: scrollbar
-  call s:HL('PmenuSbar', s:none, s:bg2)
-  " Popup menu: scrollbar thumb
-  call s:HL('PmenuThumb', s:none, s:bg4)
+    " Popup menu: normal item
+    call s:HL('Pmenu', s:fg1, s:bg2)
+    " Popup menu: selected item
+    call s:HL('PmenuSel', s:bg2, s:blue, s:bold)
+    " Popup menu: scrollbar
+    call s:HL('PmenuSbar', s:none, s:bg2)
+    " Popup menu: scrollbar thumb
+    call s:HL('PmenuThumb', s:none, s:bg4)
 endif
 
 " }}}
@@ -687,18 +687,18 @@ call s:HL('DiffText',   s:yellow, s:bg0, s:inverse)
 " Spelling: {{{
 
 if has("spell")
-  " Not capitalised word, or compile warnings
-  if g:gruvbox_improved_warnings == 0
-    call s:HL('SpellCap',   s:none, s:none, s:undercurl, s:red)
-  else
-    call s:HL('SpellCap',   s:green, s:none, s:bold . s:italic)
-  endif
-  " Not recognized word
-  call s:HL('SpellBad',   s:none, s:none, s:undercurl, s:blue)
-  " Wrong spelling for selected region
-  call s:HL('SpellLocal', s:none, s:none, s:undercurl, s:aqua)
-  " Rare word
-  call s:HL('SpellRare',  s:none, s:none, s:undercurl, s:purple)
+    " Not capitalised word, or compile warnings
+    if g:gruvbox_improved_warnings == 0
+        call s:HL('SpellCap',   s:none, s:none, s:undercurl, s:red)
+    else
+        call s:HL('SpellCap',   s:green, s:none, s:bold . s:italic)
+    endif
+    " Not recognized word
+    call s:HL('SpellBad',   s:none, s:none, s:undercurl, s:blue)
+    " Wrong spelling for selected region
+    call s:HL('SpellLocal', s:none, s:none, s:undercurl, s:aqua)
+    " Rare word
+    call s:HL('SpellRare',  s:none, s:none, s:undercurl, s:purple)
 endif
 
 " }}}
@@ -719,51 +719,51 @@ hi! link SneakLabel Search
 " Indent Guides: {{{
 
 if !exists('g:indent_guides_auto_colors')
-  let g:indent_guides_auto_colors = 0
+    let g:indent_guides_auto_colors = 0
 endif
 
 if g:indent_guides_auto_colors == 0
-  if g:gruvbox_invert_indent_guides == 0
-    call s:HL('IndentGuidesOdd', s:vim_bg, s:bg2)
-    call s:HL('IndentGuidesEven', s:vim_bg, s:bg1)
-  else
-    call s:HL('IndentGuidesOdd', s:vim_bg, s:bg2, s:inverse)
-    call s:HL('IndentGuidesEven', s:vim_bg, s:bg3, s:inverse)
-  endif
+    if g:gruvbox_invert_indent_guides == 0
+        call s:HL('IndentGuidesOdd', s:vim_bg, s:bg2)
+        call s:HL('IndentGuidesEven', s:vim_bg, s:bg1)
+    else
+        call s:HL('IndentGuidesOdd', s:vim_bg, s:bg2, s:inverse)
+        call s:HL('IndentGuidesEven', s:vim_bg, s:bg3, s:inverse)
+    endif
 endif
 
 " }}}
 " IndentLine: {{{
 
 if !exists('g:indentLine_color_term')
-  let g:indentLine_color_term = s:bg2[1]
+    let g:indentLine_color_term = s:bg2[1]
 endif
 if !exists('g:indentLine_color_gui')
-  let g:indentLine_color_gui = s:bg2[0]
+    let g:indentLine_color_gui = s:bg2[0]
 endif
 
 " }}}
 " Rainbow Parentheses: {{{
 
 if !exists('g:rbpt_colorpairs')
-  let g:rbpt_colorpairs =
-    \ [
-      \ ['blue', '#458588'], ['magenta', '#b16286'],
-      \ ['red',  '#cc241d'], ['166',     '#d65d0e']
-    \ ]
+    let g:rbpt_colorpairs =
+                \ [
+                \ ['blue', '#458588'], ['magenta', '#b16286'],
+                \ ['red',  '#cc241d'], ['166',     '#d65d0e']
+                \ ]
 endif
 
 let g:rainbow_guifgs = [ '#d65d0e', '#cc241d', '#b16286', '#458588' ]
 let g:rainbow_ctermfgs = [ '166', 'red', 'magenta', 'blue' ]
 
 if !exists('g:rainbow_conf')
-   let g:rainbow_conf = {}
+    let g:rainbow_conf = {}
 endif
 if !has_key(g:rainbow_conf, 'guifgs')
-   let g:rainbow_conf['guifgs'] = g:rainbow_guifgs
+    let g:rainbow_conf['guifgs'] = g:rainbow_guifgs
 endif
 if !has_key(g:rainbow_conf, 'ctermfgs')
-   let g:rainbow_conf['ctermfgs'] = g:rainbow_ctermfgs
+    let g:rainbow_conf['ctermfgs'] = g:rainbow_ctermfgs
 endif
 
 let g:niji_dark_colours = g:rbpt_colorpairs
@@ -842,11 +842,11 @@ hi! link StartifyFooter GruvboxBg2
 " Vimshell: {{{
 
 let g:vimshell_escape_colors = [
-  \ s:bg4[0], s:red[0], s:green[0], s:yellow[0],
-  \ s:blue[0], s:purple[0], s:aqua[0], s:fg4[0],
-  \ s:bg0[0], s:red[0], s:green[0], s:orange[0],
-  \ s:blue[0], s:purple[0], s:aqua[0], s:fg0[0]
-  \ ]
+            \ s:bg4[0], s:red[0], s:green[0], s:yellow[0],
+            \ s:blue[0], s:purple[0], s:aqua[0], s:fg4[0],
+            \ s:bg0[0], s:red[0], s:green[0], s:orange[0],
+            \ s:blue[0], s:purple[0], s:aqua[0], s:fg0[0]
+            \ ]
 
 " }}}
 " BufTabLine: {{{
@@ -1429,11 +1429,11 @@ hi! link jsonString GruvboxFg1
 " Search Highlighting Cursor {{{
 
 function! GruvboxHlsShowCursor()
-  call s:HL('Cursor', s:bg0, s:hls_cursor)
+    call s:HL('Cursor', s:bg0, s:hls_cursor)
 endfunction
 
 function! GruvboxHlsHideCursor()
-  call s:HL('Cursor', s:none, s:none, s:inverse)
+    call s:HL('Cursor', s:none, s:none, s:inverse)
 endfunction
 
 " }}}
